@@ -1,0 +1,149 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+
+    androidExtensions {
+        experimental = true
+    }
+    compileSdkVersion rootProject.ext.android_const.compileSdk
+    compileOptions.encoding = "UTF-8"
+    defaultConfig {
+        minSdkVersion rootProject.ext.android_const.minSdk
+        targetSdkVersion rootProject.ext.android_const.targetSdk
+        versionCode 1
+        versionName "1.0.0"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-frtti -fexceptions"
+            }
+        }
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+//    dataBinding {
+//        enabled true
+//    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+        disable 'InvalidPackage'
+    }
+
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion "$rootProject.ext.android_const.support"
+            }
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    /***********************************************************************
+     todo *****************Kotlin反射*********************
+     ***********************************************************************/
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    api rootProject.ext.app_dep.multidex
+
+    api rootProject.ext.app_dep.appcompat_v7
+    api rootProject.ext.app_dep.design
+    api rootProject.ext.app_dep.support_v4
+    api rootProject.ext.app_dep.recyclerview_v7
+    api rootProject.ext.app_dep.cardview_v7
+    api rootProject.ext.app_dep.constraintlayout
+
+
+
+    api rootProject.ext.app_dep.SmartRefreshLayout, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.SmartRefreshHeader, rootProject.ext.withoutStuff
+
+    api rootProject.ext.app_dep.rxjava2, rootProject.ext.withoutStuff
+    implementation rootProject.ext.app_dep.reactivestreams, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.rxandroid, rootProject.ext.withoutStuff
+
+    api rootProject.ext.app_dep.retrofit2, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.retrofit2_converter_gson, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.retrofit2_adapter_rxjava2, rootProject.ext.withoutStuff
+
+    api rootProject.ext.app_dep.glide, rootProject.ext.withoutStuff
+
+    api rootProject.ext.app_dep.okio, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.okhttp3, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.okhttp3_logging, rootProject.ext.withoutStuff
+
+    api rootProject.ext.app_dep.rxbinding2, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.rxbinding2_support_v4, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.rxbinding2_appcompat_v7, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.rxbinding2_design, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.rxbinding2_recyclerview, rootProject.ext.withoutStuff
+
+    api rootProject.ext.app_dep.appcompat_v7, rootProject.ext.withoutStuff
+
+//    api rootProject.ext.app_dep.kbinding, rootProject.ext.withoutStuff
+//    kapt rootProject.ext.app_dep.kbinding_compiler, rootProject.ext.withoutStuff
+
+//    // for common bindings, View, TextView, and ...
+//    api rootProject.ext.app_dep.kbinding_common, rootProject.ext.withoutStuff
+//    // for recyclerview bindings
+//    api rootProject.ext.app_dep.kbinding_adapterview, rootProject.ext.withoutStuff
+//    // for support v4 bindings
+//    api rootProject.ext.app_dep.kbinding_support_v4, rootProject.ext.withoutStuff
+
+
+    api rootProject.ext.app_dep.anko_base, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_commons, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_coroutine_sdk25_coroutine, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_coroutine_v7_coroutine, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_sqlite, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_commons_v7, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_commons_v7_layout, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_commons_v7_layout_coroutines, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_sdk25, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_commons_v4, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_commons_v4_layout, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_cardview, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_design, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_design_coroutines, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_gridlayout, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_percent, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_recyclerview, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_recyclerview_coroutines, rootProject.ext.withoutStuff
+    api rootProject.ext.app_dep.anko_constraintlayout, rootProject.ext.withoutStuff
+
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

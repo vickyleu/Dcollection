@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable  name="AutoCompleteCleanUpTextView">
+        <attr name="cit_drawableLeft" format="integer" />
+        <attr name="cit_drawableTop" format="integer" />
+        <attr name="cit_drawableBottom" format="integer" />
+        <attr name="cit_drawableRight" format="integer" />
+        <attr name="cit_drawableStart" format="integer" />
+        <attr name="cit_drawableEnd" format="integer" />
+        <attr name="cit_iconWidth" format="dimension" />
+        <attr name="cit_iconHeight" format="dimension" />
+        <attr name="cit_iconColor" format="color" />
+    </declare-styleable >
+
+
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="border_overlay" format="boolean" />
+        <!-- {@deprecated Use civ_circlebackground_color instead.} -->
+        <attr name="fill_color" format="color" />
+        <attr name="circleBackgroundColor" format="color" />
+    </declare-styleable>
+
+    <attr name="strokeColor" format="color" />
+    <attr name="speed">
+        <enum name="speedOne" value="1" />
+        <enum name="speedTwo" value="2" />
+    </attr>
+
+    <declare-styleable name="RightDiaView">
+        <attr name="strokeColor" />
+        <attr name="speed" />
+    </declare-styleable>
+
+    <declare-styleable name="WrongDiaView">
+        <attr name="strokeColor" />
+        <attr name="speed" />
+    </declare-styleable>
+
+</resources>

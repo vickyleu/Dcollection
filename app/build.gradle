@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion rootProject.ext.android_const.compileSdk
+    compileOptions.encoding = "UTF-8"
+    defaultConfig {
+        applicationId "com.superfactory.dcollection"
+        minSdkVersion rootProject.ext.android_const.minSdk
+        targetSdkVersion rootProject.ext.android_const.targetSdk
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+        disable 'InvalidPackage'
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':library')
+
+}
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

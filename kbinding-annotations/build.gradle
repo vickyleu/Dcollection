@@ -1,0 +1,7 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+dependencies {
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
