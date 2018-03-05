@@ -25,7 +25,7 @@ class ListViewPagingOnSubscribe(val view: ListView) : ObservableOnSubscribe<Pair
             e.isDisposed
             if (e.isUnsubscribed) return@AdapterPagingListener
 
-            e.onNext(Pair(position, previous));
+            e.onNext(Pair(position, previous))
         }
         view.setPagingListener(pagingListener)
         e.add(object : MainThreadSubscription() {
