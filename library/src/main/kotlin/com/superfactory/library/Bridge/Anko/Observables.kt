@@ -178,69 +178,6 @@ class ObservableFieldImpl<T : Any?>(private var _value: T, private val configure
             addOnPropertyChangedCallback(configureClosure)
         }
     }
-
-//    override fun writeToParcel(parcel: Parcel, flags: Int) {
-//        super.writeToParcel(parcel, flags)
-//        parcel.writeByte(if (configured) 1 else 0)
-//        parcel.writeStringNotNull(name)
-//    }
-//
-//    override fun describeContents(): Int {
-//        return 0
-//    }
-//
-//    companion object CREATOR : Parcelable.Creator<ObservableFieldImpl<*>> {
-//        override fun createFromParcel(parcel: Parcel): ObservableFieldImpl<*> {
-//            val name = parcel.readString()
-//            if (name==null||name.equals("")){
-//                return observable<Any?>(null)
-//            }
-//            var inst:ObservableFieldImpl<*> ?= null
-//            when(name){
-//                String.javaClass.name->{
-//                    inst=observable(parcel.readString())
-//                }
-//                Int.javaClass.name->{
-//                    inst=observable(parcel.readInt())
-//                }
-//                Float.javaClass.name->{
-//                    inst=observable(parcel.readFloat())
-//                }
-//                Double.javaClass.name->{
-//                    inst=observable(parcel.readDouble())
-//                }
-//                Byte.javaClass.name->{
-//                    inst=observable(parcel.readByte())
-//                }
-//                Long.javaClass.name->{
-//                    inst=observable(parcel.readLong())
-//                }
-//                Boolean::class.java.name->{
-//                    inst=observable(parcel.readByte() != 0.toByte())
-//                }
-//                Parcelable::class.java.name->{
-//                    inst=observable(parcel.readParcelable<Parcelable>(ClassLoader.getSystemClassLoader()))
-//                }
-//                Array<Parcelable>::class.java.name->{
-//
-//                }
-//                List::class.java.name->{
-//
-//                }
-//                else->{
-//                    inst=observable(Any())
-//                }
-//            }
-//            inst.configured = parcel.readByte() != 0.toByte()
-//            return inst
-//        }
-//
-//        override fun newArray(size: Int): Array<ObservableFieldImpl<*>?> {
-//            return arrayOfNulls(size)
-//        }
-//    }
-
-
 }
 
 
