@@ -1,4 +1,5 @@
 *.iml
+/.externalNativeBuild
 /.gradle
 /.idea
 .DS_Store
