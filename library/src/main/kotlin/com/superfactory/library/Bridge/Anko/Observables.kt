@@ -3,7 +3,6 @@ package com.superfactory.library.Bridge.Anko
 import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
-import com.xiasuhuei321.loadingdialog.view.LoadingDialog
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 

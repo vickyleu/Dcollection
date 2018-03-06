@@ -53,6 +53,12 @@ android {
         disable 'InvalidPackage'
     }
 
+
+    repositories {
+        flatDir {
+            dirs 'kbinding','libs'
+        }
+    }
 }
 
 configurations.all {
@@ -110,15 +116,8 @@ dependencies {
 
     api rootProject.ext.app_dep.appcompat_v7, rootProject.ext.withoutStuff
 
-//    api rootProject.ext.app_dep.kbinding, rootProject.ext.withoutStuff
-//    kapt rootProject.ext.app_dep.kbinding_compiler, rootProject.ext.withoutStuff
-
-//    // for common bindings, View, TextView, and ...
-//    api rootProject.ext.app_dep.kbinding_common, rootProject.ext.withoutStuff
-//    // for recyclerview bindings
-//    api rootProject.ext.app_dep.kbinding_adapterview, rootProject.ext.withoutStuff
-//    // for support v4 bindings
-//    api rootProject.ext.app_dep.kbinding_support_v4, rootProject.ext.withoutStuff
+    api fileTree(include: ['*.aar','*.jar'], dir: 'kbinding' ,excludes: ['kbinding-compiler'])
+    kapt files('kbinding/kbinding-compiler.jar')
 
 
     api rootProject.ext.app_dep.anko_base, rootProject.ext.withoutStuff

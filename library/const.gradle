@@ -21,7 +21,10 @@ ext {
             rxandroid         : "2.0.1",
             reactivestreams   : "1.0.0",
             SmartRefreshLayout: "1.0.5-alpha-3",
-            commons_lang      : "3.4"
+            commons_lang      : "3.4",
+            auto_service      : "1.0-rc2",
+            auto_common       : "0.4",
+            javapoet          : "1.4.0"
 //            fabric     : "2.4.0",
 //            leakcanary : "1.3.1",
 //            logansquare: "1.1.0",
@@ -102,6 +105,7 @@ ext {
             reactivestreams                  : "org.reactivestreams:reactive-streams:$dep_const.reactivestreams",
             rxandroid                        : "io.reactivex.rxjava2:rxandroid:$dep_const.rxandroid",
 
+//            rxbinding                       : "com.jakewharton.rxbinding:rxbinding:1.0.1",
             rxbinding2                       : "com.jakewharton.rxbinding2:rxbinding:$dep_const.rxbinding2",
             rxbinding2_support_v4            : "com.jakewharton.rxbinding2:rxbinding-support-v4:$dep_const.rxbinding2",
             rxbinding2_appcompat_v7          : "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$dep_const.rxbinding2",
@@ -110,14 +114,16 @@ ext {
             rxbinding_leanback               : "com.jakewharton.rxbinding2:rxbinding-leanback-v17:$dep_const.rxbinding2",
 
 
-            commons_lang:"org.apache.commons:commons-lang3:$dep_const.commons_lang",
+            commons_lang                     : "org.apache.commons:commons-lang3:$dep_const.commons_lang",
 
-            kbinding                         : "com.benny.library:kbinding:$dep_const.kbinding",
-            kbinding_common                  : "com.benny.library:kbinding-common:$dep_const.kbinding",
-            kbinding_adapterview             : "com.benny.library:kbinding-adapterview:$dep_const.kbinding",
-            kbinding_support_v4              : "com.benny.library:kbinding-support-v4:$dep_const.kbinding",
-            kbinding_compiler                : "com.benny.library:kbinding-compiler:$dep_const.kbinding"
-
+//            kbinding                         : "com.benny.library:kbinding:$dep_const.kbinding",
+//            kbinding_common                  : "com.benny.library:kbinding-common:$dep_const.kbinding",
+//            kbinding_adapterview             : "com.benny.library:kbinding-adapterview:$dep_const.kbinding",
+//            kbinding_support_v4              : "com.benny.library:kbinding-support-v4:$dep_const.kbinding",
+//            kbinding_compiler                : "com.benny.library:kbinding-compiler:$dep_const.kbinding"
+            auto_service                     : "com.google.auto.service:auto-service:$dep_const.auto_service",
+            auto_common                      : "com.google.auto:auto-common:$dep_const.auto_common",
+            javapoet                         : "com.squareup:javapoet:$dep_const.javapoet"
 //            databinding_compiler             : "com.android.databinding:compiler:$dep_const.databinding"
 
     ]

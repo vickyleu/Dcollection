@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.benny.library.kbinding.bind.BindingDelegate
+import com.benny.library.kbinding.view.BindingDisposerGenerator
 import com.superfactory.library.Bridge.Anko.Adapt.BaseAnko
 import com.superfactory.library.Bridge.Anko.Adapt.BaseToolBar
 import com.superfactory.library.Bridge.Anko.BindingComponent
@@ -31,7 +33,7 @@ import org.jetbrains.anko.topPadding
  * @Date 2018年01月17日  11:35:47
  * @ClassName 这里输入你的类名(或用途)
  */
-abstract class BaseActivity<V : Parcelable, A : BaseActivity<V, A>> : AppCompatActivity(), BaseAnko<V, A> {
+abstract class BaseActivity<V : Parcelable, A : BaseActivity<V, A>> : AppCompatActivity(), BindingDisposerGenerator, BindingDelegate,BaseAnko<V, A> {
     private val TAG = javaClass.simpleName
     protected var toolbar: BaseToolBar<A, V>? = null
     protected var toolbarAnko: View? = null
