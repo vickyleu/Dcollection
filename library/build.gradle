@@ -75,7 +75,10 @@ configurations.all {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api fileTree(include: ['*.aar', '*.jar'], dir: 'kbinding', excludes: ['kbinding-compiler'])
-//todo 因为原作者kbinding库使用的仍是Rxjava1.x老版本,所以将kbinding所引用的依赖库全部进行升级,kbinding需要Rxjava,Android v4等等第三方库,全部引用会造成aapt错误,去除引用需要写很多的exclude,很恶心很难搞. 为了不重复导入不必要的第三方包,除了部分运行时必要的小众库已经将其他所有第三方引用去除,整个kbinding库的大小仅240kb,第三方库如果不引用的情况下编译不受影响,任然能够正常打包安装,但运行会出现找不到class而崩溃
+//因为原作者kbinding库使用的仍是Rxjava1.x老版本,所以将kbinding所引用的依赖库全部进行升级,kbinding需要Rxjava,Android v4等等
+// 第三方库,全部引用会造成aapt错误,去除引用需要写很多的exclude,很恶心很难搞. 为了不重复导入不必要的第三方包,除了部分运行时必要的小众库
+// 已经将其他所有第三方引用去除,整个kbinding库的大小仅240kb,第三方库如果不引用的情况下编译不受影响,任然能够正常打包安装,但运行会
+// 出现找不到class而崩溃
     //todo 以下为必须引用的库(必须引用kotlin-stdlib,虽然是废话)
     //todo auto-adapter:[@support_v4, @recyclerview]
     //todo kbinding:[@kbinding-annotation.aar,@rxjava2, @rxandroid, @anko-common]
