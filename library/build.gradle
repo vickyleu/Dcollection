@@ -87,6 +87,8 @@ dependencies {
     //todo kbinding-support-v4:[@kbinding.aar, @kbinding-annotation.aar, @rxbinding-support-v4, @rxjava2, @rxandroid, @rxbinding2, @anko-common]
 
     kapt files('kbinding/kbinding-compiler.jar')//注解编译器
+    api fileTree(include: ['*.aar', '*.jar'], dir: 'syntax')
+
     api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     /***********************************************************************
      todo *****************Kotlin反射*********************
