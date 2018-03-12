@@ -17,13 +17,18 @@
 package com.superfactory.library.extension.rx
 
 import android.content.Context
-import com.rayfantasy.icode.extension.KAlertDialogBuilder
-import com.rayfantasy.icode.extension.alert
-import org.reactivestreams.Subscriber
-import kotlin.properties.Delegates.observable
+import com.superfactory.library.extension.KAlertDialogBuilder
+import com.superfactory.library.extension.alert
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
 
 fun <T> Context.alertObservable(
         message: String,
         title: String? = null,
-        init: (KAlertDialogBuilder.(Subscriber<in T>) -> Unit)? = null)
-        = observable<T> { alert(message, title) { init?.invoke(this, it) } }
+        init: (KAlertDialogBuilder.(ObservableEmitter<in T>) -> Unit)? = null) =
+        Observable.create<T> {
+            alert(message, title) {
+                init?.invoke(this, it)
+            }
+        }
+//observable<T> { alert(message, title) { init?.invoke(this, it) } }

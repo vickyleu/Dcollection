@@ -14,12 +14,11 @@
  *  limitations under the License.
  */
 
-package com.rayfantasy.icode.extension
+package com.superfactory.library.extension
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.ViewPropertyAnimator
-import com.superfactory.library.extension._AnimatorListener
 
 fun ViewPropertyAnimator.onAnimationEnd(listener: (Animator?) -> Unit): ViewPropertyAnimator {
     setListener(object : AnimatorListenerAdapter() {

@@ -14,21 +14,21 @@
  *  limitations under the License.
  */
 
-package com.rayfantasy.icode.extension
+package com.superfactory.library.extension
 
 import android.widget.ImageView
-import com.amulyakhare.textdrawable.TextDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import com.rayfantasy.icode.postutil.PostUtil
+import com.superfactory.library.Graphics.TextDrawables.ShapeTextDrawable
 import jp.wasabeef.glide.transformations.CropCircleTransformation
 
 fun ImageView.loadPortrait(username: String, placeholderRes: Int? = null, circle: Boolean = true,
                            onResourceReady: ((GlideDrawable, GlideAnimation<in GlideDrawable>) -> Unit)? = null) {
     val placeholder = placeholderRes?.let { resources.getDrawable(placeholderRes) } ?:
-            TextDrawable
+    ShapeTextDrawable
                     .builder().buildRound(username[0].toString().toUpperCase(),
                     username.hashCode().alpha(0xff).shadowColor())
     val builder = Glide.with(context)

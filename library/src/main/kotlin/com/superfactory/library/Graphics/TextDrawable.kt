@@ -41,12 +41,12 @@ import com.superfactory.library.Debuger
 
 /**
  * A Drawable object that draws text.
- * A TextDrawable accepts most of the same parameters that can be applied to
+ * A ShapeTextDrawable accepts most of the same parameters that can be applied to
  * [android.widget.TextView] for displaying and formatting text.
  *
  * Optionally, a [Path] may be supplied on which to draw the text.
  *
- * A TextDrawable has an intrinsic size equal to that required to draw all
+ * A ShapeTextDrawable has an intrinsic size equal to that required to draw all
  * the text it has been supplied, when possible.  In cases where a [Path]
  * has been supplied, the caller must explicitly call
  * [setBounds()][.setBounds] to provide the Drawable
@@ -284,9 +284,9 @@ class TextDrawable(context: Context) : Drawable() {
 
     /**
      * Optional Path object on which to draw the text.  If this is set,
-     * TextDrawable cannot properly measure the bounds this drawable will need.
+     * ShapeTextDrawable cannot properly measure the bounds this drawable will need.
      * You must call [setBounds()][.setBounds] before
-     * applying this TextDrawable to any View.
+     * applying this ShapeTextDrawable to any View.
      *
      * Calling this method with `null` will remove any Path currently attached.
      */

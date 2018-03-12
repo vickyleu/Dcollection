@@ -1,4 +1,4 @@
-package com.superfactory.library.Graphics.Like_
+package com.superfactory.library.Graphics.LikeButton
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -21,7 +21,6 @@ import android.widget.ImageView
 import com.superfactory.library.Graphics.Like_.extentions.circleView
 import com.superfactory.library.Graphics.Like_.extentions.dotsView
 import com.superfactory.library.R
-import com.superfactory.library.extension.lparams
 import org.jetbrains.anko.*
 
 /**
@@ -32,7 +31,7 @@ import org.jetbrains.anko.*
  * @ClassName 这里输入你的类名(或用途)
  */
 
-class LikeButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr), View.OnClickListener {
+open class LikeButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr), View.OnClickListener {
 
     private var icon: ImageView? = null
     private var dotsView: DotsView? = null

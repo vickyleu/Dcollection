@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.rayfantasy.icode.extension
+package com.superfactory.library.extension
 
 import android.app.Fragment
 import android.app.ProgressDialog

@@ -14,16 +14,18 @@
  *  limitations under the License.
  */
 
-package com.rayfantasy.icode.extension
+package com.superfactory.library.extension
 
+import android.annotation.TargetApi
 import android.content.Context
+import android.os.Build
 import android.view.View
 import android.view.ViewManager
-import com.superfactory.library.extension.defaultInit
-import io.codetail.widget.RevealFrameLayout
+import com.superfactory.library.Graphics.CircularReveal.widget.RevealFrameLayout
 import org.jetbrains.anko.custom.ankoView
+import org.jetbrains.anko.wrapContent
 
-inline fun ViewManager.revealFrameLayout(init: _RevealFrameLayout.() -> Unit) = ankoView(::_RevealFrameLayout, init)
+inline fun ViewManager.revealFrameLayout(init: _RevealFrameLayout.() -> Unit) = ankoView(::_RevealFrameLayout, theme = 0) { init() }
 
 class _RevealFrameLayout(context: Context) : RevealFrameLayout(context) {
     fun <T : View> T.lparams(
@@ -38,8 +40,8 @@ class _RevealFrameLayout(context: Context) : RevealFrameLayout(context) {
     }
 
     fun <T : View> T.lparams(
-            width: Int = LayoutParams.WRAP_CONTENT,
-            height: Int = LayoutParams.WRAP_CONTENT,
+            width: Int = wrapContent,
+            height: Int = wrapContent,
             init: LayoutParams.() -> Unit = defaultInit
     ): T {
         val layoutParams = android.widget.FrameLayout.LayoutParams(width, height)
@@ -49,8 +51,8 @@ class _RevealFrameLayout(context: Context) : RevealFrameLayout(context) {
     }
 
     fun <T : View> T.lparams(
-            width: Int = LayoutParams.WRAP_CONTENT,
-            height: Int = LayoutParams.WRAP_CONTENT,
+            width: Int = wrapContent,
+            height: Int = wrapContent,
             gravity: Int,
             init: LayoutParams.() -> Unit = defaultInit
     ): T {
@@ -60,6 +62,7 @@ class _RevealFrameLayout(context: Context) : RevealFrameLayout(context) {
         return this
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     fun <T : View> T.lparams(
             source: LayoutParams?,
             init: LayoutParams.() -> Unit = defaultInit

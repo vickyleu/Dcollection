@@ -16,7 +16,8 @@
 
 package com.superfactory.library.extension
 
-import android.animation.Animator
+import com.nineoldandroids.animation.Animator
+
 
 fun Animator.addListener(init: _AnimatorListenerNineOldAndroids.() -> Unit) = addListener(_AnimatorListenerNineOldAndroids().apply(init))
 

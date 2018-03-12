@@ -14,11 +14,11 @@
  *  limitations under the License.
  */
 
-package com.rayfantasy.icode.extension
+package com.superfactory.library.extension
 
 import com.nineoldandroids.animation.ArgbEvaluator
 import com.nineoldandroids.animation.ValueAnimator
-import com.superfactory.library.extension._AnimatorListenerNineOldAndroids
+
 
 fun colorAnim(colorFrom: Int, colorTo: Int, duration: Long, callback: (Int) -> Unit,
               listener: (_AnimatorListenerNineOldAndroids.() -> Unit)? = null): ValueAnimator {

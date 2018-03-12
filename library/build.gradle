@@ -105,10 +105,14 @@ dependencies {
     api rootProject.ext.app_dep.constraintlayout
 
 
+    api rootProject.ext.app_dep.nineold
+
+
 
     api rootProject.ext.app_dep.SmartRefreshLayout, rootProject.ext.withoutStuff
     api rootProject.ext.app_dep.SmartRefreshHeader, rootProject.ext.withoutStuff
 
+    api rootProject.ext.app_dep.rxkotlin2, rootProject.ext.withoutStuff
     api rootProject.ext.app_dep.rxjava2, rootProject.ext.withoutStuff
     implementation rootProject.ext.app_dep.reactivestreams, rootProject.ext.withoutStuff
     api rootProject.ext.app_dep.rxandroid, rootProject.ext.withoutStuff

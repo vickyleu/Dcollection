@@ -14,10 +14,11 @@
  *  limitations under the License.
  */
 
-package com.rayfantasy.icode.extension
+package com.superfactory.library.extension
 
-import com.like.LikeButton
-import com.like.OnLikeListener
+import com.superfactory.library.Graphics.LikeButton.LikeButton
+import com.superfactory.library.Graphics.LikeButton.OnLikeListener
+
 
 /**
  * Created by qweas on 2016/2/15 0015.

@@ -16,6 +16,7 @@
 
 package com.superfactory.library.extension
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.support.annotation.AttrRes
@@ -31,26 +32,27 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewManager
 import android.widget.LinearLayout
+import com.superfactory.library.Bridge.Anko.DslView._LikeButton
+import com.superfactory.library.Graphics.LikeButton.LikeButton
+import com.superfactory.library.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7._Toolbar
-import org.jetbrains.anko.appcompat.v7.`$$Anko$Factories$AppcompatV7ViewGroup`
 import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.design._AppBarLayout
 import org.jetbrains.anko.design._CoordinatorLayout
-import org.jetbrains.anko.design.`$$Anko$Factories$DesignViewGroup`
 import org.jetbrains.anko.internals.AnkoInternals
 import org.jetbrains.anko.support.v4._DrawerLayout
-import org.jetbrains.anko.support.v4.`$$Anko$Factories$SupportV4ViewGroup`
 import java.util.concurrent.atomic.AtomicInteger
 
-fun collapseModePin(): CollapsingToolbarLayout.LayoutParams.() -> Unit = { collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN }
+fun collapseModePin(): CollapsingToolbarLayout.LayoutParams.() -> Unit ={ collapseMode = CollapsingToolbarLayout.
+        LayoutParams.COLLAPSE_MODE_PIN }
 
 fun Context.snackBar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, init: Snackbar.() -> Unit) = Snackbar.make(view, text, length).apply { init() }.show()
 fun View.snackBar(text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context.snackBar(this, text, length, snackbar)
-fun Fragment.snackBar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context.snackBar(view, text, length, snackbar)
+fun Fragment.snackBar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context?.snackBar(view, text, length, snackbar)
 
 fun Context.attr(@AttrRes attribute: Int): TypedValue {
-    var typed = TypedValue()
+    val typed = TypedValue()
     ctx.theme.resolveAttribute(attribute, typed, true)
     return typed
 }
@@ -76,50 +78,57 @@ fun View.dimenAttr(@AttrRes attribute: Int): Int = context.dimenAttr(attribute)
 fun View.colorAttr(@AttrRes attribute: Int): Int = context.colorAttr(attribute)
 fun View.attr(@AttrRes attribute: Int): TypedValue = context.attr(attribute)
 
-fun Fragment.dimenAttr(@AttrRes attribute: Int): Int = activity.dimenAttr(attribute)
-fun Fragment.colorAttr(@AttrRes attribute: Int): Int = activity.colorAttr(attribute)
-fun Fragment.attr(@AttrRes attribute: Int): TypedValue = activity.attr(attribute)
+fun Fragment.dimenAttr(@AttrRes attribute: Int): Int = activity?.dimenAttr(attribute) ?: 0
+fun Fragment.colorAttr(@AttrRes attribute: Int): Int = activity?.colorAttr(attribute) ?: 0
+fun Fragment.attr(@AttrRes attribute: Int): TypedValue = activity?.attr(attribute) ?: TypedValue()
 
 fun ViewManager.appBarLayout(@StyleRes theme: Int): AppBarLayout = appBarLayout(theme, {})
 inline fun ViewManager.appBarLayout(@StyleRes theme: Int, init: _AppBarLayout.() -> Unit): AppBarLayout {
-    return ankoView(theme, `$$Anko$Factories$DesignViewGroup`.APP_BAR_LAYOUT) { init() }
+    return ankoView(::_AppBarLayout, theme) { init() }
 }
 
 fun ViewManager.toolbar(@StyleRes theme: Int): _Toolbar = toolbar(theme, {})
 inline fun ViewManager.toolbar(@StyleRes theme: Int, init: _Toolbar.() -> Unit): _Toolbar {
-    return ankoView(theme, `$$Anko$Factories$AppcompatV7ViewGroup`.TOOLBAR) { init() }
+    return ankoView(::_Toolbar, theme) { init() }
 }
 
 fun ViewManager.linearLayout(@StyleRes theme: Int): LinearLayout = linearLayout(theme, {})
 inline fun ViewManager.linearLayout(@StyleRes theme: Int, init: _LinearLayout.() -> Unit): LinearLayout {
-    return ankoView(theme, `$$Anko$Factories$Sdk15ViewGroup`.LINEAR_LAYOUT) { init() }
+    return ankoView(::_LinearLayout, theme) { init() }
 }
 
 fun ViewManager.coordinatorLayout(@StyleRes theme: Int) = coordinatorLayout(theme, {})
 inline fun ViewManager.coordinatorLayout(@StyleRes theme: Int, init: _CoordinatorLayout.() -> Unit): _CoordinatorLayout {
-    return ankoView(theme, `$$Anko$Factories$DesignViewGroup`.COORDINATOR_LAYOUT, init)
+    return ankoView(::_CoordinatorLayout, theme, init)
 }
 
 fun ViewManager.fitedCoordinatorLayout(init: _CoordinatorLayout.() -> Unit) = coordinatorLayout(R.style.FitedStyle, init)
 
-inline fun ViewManager.fittedDrawerLayout(init: _DrawerLayout.() -> Unit)
-        = ankoView(`$$Anko$Factories$SupportV4ViewGroup`.DRAWER_LAYOUT) {
+@SuppressLint("RestrictedApi")
+inline fun ViewManager.fittedDrawerLayout(init: _DrawerLayout.() -> Unit) = ankoView(::_DrawerLayout, 0) {
     fitsSystemWindows = true
     context.configuration(fromSdk = Build.VERSION_CODES.LOLLIPOP) {
         systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        setOnApplyWindowInsetsListener({ view, insets ->
-            val draw = insets.systemWindowInsetTop > 0
-            if (view is DrawerLayout) {
-                view.setChildInsets(insets, draw)
-            }
-            return@setOnApplyWindowInsetsListener insets.consumeSystemWindowInsets()
-        })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            setOnApplyWindowInsetsListener({ view, insets ->
+                val draw = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+                    insets.systemWindowInsetTop > 0
+                } else {
+                    TODO("VERSION.SDK_INT < KITKAT_WATCH")
+                }
+                if (view is DrawerLayout) {
+                    view.setChildInsets(insets, draw)
+                }
+                return@setOnApplyWindowInsetsListener insets.consumeSystemWindowInsets()
+            })
+        }
     }
     init()
 }
 
 fun ViewManager.cardView(@StyleRes theme: Int, init: CardView.() -> Unit) = ankoView(theme, ::CardView, init)
 
+@SuppressLint("RestrictedApi")
 inline fun <T : View> ViewManager.ankoView(@StyleRes theme: Int, factory: (ctx: Context) -> T, init: T.() -> Unit): T {
     var ctx = AnkoInternals.getContext(this)
     if (theme != 0 && (ctx !is ContextThemeWrapper || ctx.themeResId != theme)) {
@@ -161,4 +170,5 @@ fun generateViewId(): Int {
         }
     }
 }
-fun ViewManager.likeButton(init: LikeButton.() -> Unit) = ankoView(::LikeButton, init)
+
+fun ViewManager.likeButton(init: LikeButton.() -> Unit) = ankoView(::_LikeButton, theme = 0) { init() }

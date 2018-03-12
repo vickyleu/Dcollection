@@ -18,6 +18,7 @@ package com.superfactory.library.theme
 
 import android.content.Context
 import com.superfactory.library.R
+import com.superfactory.library.extension.colorAnim
 import org.jetbrains.anko.defaultSharedPreferences
 
 object ThemeModel {

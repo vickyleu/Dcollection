@@ -17,7 +17,10 @@
 package com.superfactory.library.extension.rx
 
 import io.reactivex.Observable
-import kotlin.properties.Delegates.observable
 
-fun <T> Observable<T>.filterSingle(call: (T) -> Boolean)
-        = flatMap { t -> observable<T> { if (call(t)) it.onNext(t) } }
+fun <T> Observable<T>.filterSingle(call: (T) -> Boolean) = flatMap { t ->
+    Observable.create<T> {
+        if (call(t)) it.onNext(t)
+    }
+//    observable<T> { if (call(t)) it.onNext(t) }
+}

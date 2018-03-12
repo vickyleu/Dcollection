@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Library</string>
+    <!--RelativeDateFormat-->
+    <string name="one_second_ago">%1$s秒前</string>
+    <string name="one_minute_ago">%1$s分钟前</string>
+    <string name="one_hour_ago">%1$s小时前</string>
+    <string name="one_day_ago">%1$s天前</string>
+    <string name="one_month_ago">%1$s个月前</string>
+    <string name="one_year_ago">%1$s年前</string>
 </resources>
